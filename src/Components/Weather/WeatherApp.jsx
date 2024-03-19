@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react'
 import '/Users/macuser/Documents/github/weather-app/src/Components/Weather/Weather.css'
 
 // import clear from "/Users/macuser/Documents/github/weather-app/src/assets/clear.png"
@@ -19,31 +20,26 @@ function WeatherApp() {
         const city = document.getElementsByClassName("cityName");
 
         if (city[0].value === ""){
-            return ""
+            return 0;
         }
 
-        let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api_key}`
+        let url = `https://api.openweathermap.org/data/2.5/weather?q=${city[0].value}&appid=${api_key}`
 
         let response = await fetch(url);
         let data = await response.json();
 
-        const temprature = document.getElementsByClassName("temprature")
-        const location = document.getElementsByClassName("temprature")
-        const humidity = document.getElementsByClassName("humidity")
-        const wind = document.getElementsByClassName("wind")
+        const temprature = document.getElementsByClassName("temp")
+        const location = document.getElementsByClassName("location")
+        const humidityElements = document.getElementsByClassName("humidity")
+        const windElements = document.getElementsByClassName("wind")
+        
 
 
  
-        temprature[0].innerHTML = data.main.temp;
+        temprature[0].innerHTML = data.main.temp + " °C";
         location[0].innerHTML = data.name;
-        humidity[0].innerHTML = data.main.humidity;
-        wind[0].innerHTML = data.wind.speed;
-
-
-
-
-
-
+        humidityElements[0].innerHTML = data.main.humidity + " %";
+        windElements[0].innerHTML = data.wind.speed + " km/h";
 
         
     }
@@ -55,7 +51,7 @@ function WeatherApp() {
         <div className='weather-img'>
             <img src={cloud} alt="" />
         </div>
-        <div className='temp'>24°C</div>
+        <div className='temp'>0°C</div>
         <div className='location'>Seattle</div>
         <div className='data-container'>
             <div className='element'>
@@ -76,7 +72,7 @@ function WeatherApp() {
         <div className='top-bar'>
             <input type="text" className='cityName' placeholder='Enter City' />
             <div className="search-icon">
-                <img src={searchIcon} alt="seach icon image"/>
+                <img src={searchIcon} onClick={() => {search()}} alt="seach icon image"/>
             </div>
         </div>
 

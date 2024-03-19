@@ -7,8 +7,8 @@ function Geography() {
   
     const [location, setLocation] = useState('Seattle');
     const [country, setCountry] = useState('USA');
-    const [grnd_level, setGroundLevel] = useState('0 %');
-    const [seaLevel, setSeaLevel] = useState("");
+    const [grnd_level, setGroundLevel] = useState('0m');
+    const [seaLevel, setSeaLevel] = useState("0m");
 
     let api_key = "b039d4d6537b6af55585b8f0ea3b116d";
 
